@@ -43,15 +43,14 @@ class Anyone(commands.Cog):
 
         s = ctx.message.author
         q = getQueue(ctx.guild)
-        if s not in q:
-            if len(q) < 1:
-                q.append(s)
-                logging.info('{0} add {1}'.format(ctx.guild, s))
-                prevMessages[k] = await ctx.send(
-                    s.mention + ' is now in the kitchen')
+        if len(q) < 1:
+            q.append(s)
+            logging.info('{0} add {1}'.format(ctx.guild, s))
+            prevMessages[k] = await ctx.send(
+                s.mention + ' is now in the kitchen')
         else:
             prevMessages[k] = await ctx.send(
-            'someone is already in the kitchen')
+                q[0].mention + ' is already in the kitchen')
 
     @commands.command()
     async def done(self, ctx: Context):
