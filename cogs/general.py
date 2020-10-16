@@ -4,7 +4,7 @@ from discord.ext.commands import Context
 
 class General(commands.Cog):
     """
-    General commands for everyone.
+    General commands
     """
 
     @commands.command()
@@ -13,7 +13,7 @@ class General(commands.Cog):
         Print a link to the source code
         """
         await ctx.send(content='Created by `Joel Adams`\n'
-                               'ungaBunga link')
+                               'https://github.com/JoelLucaAdams/kitchenBot')
 
     @commands.command()
     async def info(self, ctx: Context):
@@ -28,4 +28,4 @@ class General(commands.Cog):
         Report feedback or issues with the bot
         """
         await ctx.send('If the bot is broken or you have any feedback you\'d like to submit please create a issue on '
-                       'GitHub: ''')
+                       'GitHub: https://github.com/JoelLucaAdams/kitchenBot')
