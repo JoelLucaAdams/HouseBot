@@ -26,7 +26,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
-    command_prefix="!kitchen ",
+    command_prefix="?kitchen ",
     help_command=helpCommand,
 )
 
