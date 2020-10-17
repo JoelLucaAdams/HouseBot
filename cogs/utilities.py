@@ -2,13 +2,6 @@ from discord.ext import commands
 from discord.ext.commands import Context
 
 
-def setup(bot):
-    """
-    Setup the cogs in this extension
-    """
-    bot.add_cog(Utilities(bot))
-
-
 class Utilities(commands.Cog):
     """
     General Utilities
@@ -25,3 +18,19 @@ class Utilities(commands.Cog):
         await message.edit(content='pong. `DWSP latency: ' + str(round(ctx.bot.latency * 1000)) + 'ms` '
                                                                                                   '`Response time: ' + str(
             round(end_time - start_time, 3)) + 'ms`')
+
+    @commands.command()
+    async def source(self, ctx: Context):
+        """
+        Print a link to the source code
+        """
+        await ctx.send(content='Created by `Joel Adams`\n'
+                               'https://github.com/JoelLucaAdams/kitchenBot')
+
+    @commands.command()
+    async def feedback(self, ctx: Context):
+        """
+        Report feedback or issues with the bot
+        """
+        await ctx.send('If the bot is broken or you have any feedback you\'d like to submit please create a issue on '
+                       'GitHub: https://github.com/JoelLucaAdams/kitchenBot')

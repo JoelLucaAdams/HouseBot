@@ -6,9 +6,10 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import DefaultHelpCommand
 from dotenv import load_dotenv
-from cogs.general import General
 
 # logs data to the discord.log file, if this file doesn't exist at runtime it is created automatically
+from cogs.utilities import Utilities
+
 logger = logging.getLogger('discord')
 logger.setLevel(logging.INFO)  # logging levels: NOTSET (all), DEBUG (bot interactions), INFO (bot connected etc)
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
@@ -25,18 +26,17 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
-    command_prefix="?kitchen ",
+    command_prefix="!kitchen ",
     help_command=helpCommand,
 )
 
 # Setup the General cog with the help command
-generalCog = General()
+generalCog = Utilities()
 bot.add_cog(generalCog)
 helpCommand.cog = generalCog
 
 # load other cogs
 bot.load_extension("cogs.kitchenBot")
-bot.load_extension("cogs.utilities")
 
 
 @bot.event
