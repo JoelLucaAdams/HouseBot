@@ -26,8 +26,8 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
-    command_prefix="?kitchen ",
-    help_command=helpCommand,
+    command_prefix=["?kitchen ", "?k "],
+    help_command=helpCommand
 )
 
 # Setup the General cog with the help command
