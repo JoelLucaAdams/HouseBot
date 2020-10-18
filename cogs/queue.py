@@ -6,8 +6,6 @@ import logging
 kitchenQueue = {'nothing': []}
 bathroomQueue = {'nothing': []}
 
-prevMessages = {'dummy': None}
-
 
 def setup(bot):
     """
@@ -18,7 +16,7 @@ def setup(bot):
 
 def getKitchenQueue(serverName: str):
     """
-    Get the relevant queue for the server
+    Get the kitchen queue for the server
     """
     if serverName in kitchenQueue.keys():
         return kitchenQueue.get(serverName)
@@ -26,9 +24,10 @@ def getKitchenQueue(serverName: str):
         kitchenQueue[serverName] = []
         return kitchenQueue.get(serverName)
 
+
 def getBathroomQueue(serverName: str):
     """
-    Get the relevant queue for the server
+    Get the bathroom queue for the server
     """
     if serverName in bathroomQueue.keys():
         return bathroomQueue.get(serverName)
@@ -36,9 +35,10 @@ def getBathroomQueue(serverName: str):
         bathroomQueue[serverName] = []
         return bathroomQueue.get(serverName)
 
+
 class Queue(commands.Cog):
     """
-    Commands for kitchen
+    Commands for house
     """
 
     def __init__(self, bot):
@@ -47,7 +47,7 @@ class Queue(commands.Cog):
     @commands.command()
     async def use(self, ctx: Context, arg):
         """
-        Adds the person to the kitchen queue
+        Adds the person to the kitchen(k) or bathroom(b) queue
         """
         k = ctx.guild.name + ctx.channel.name
         s = ctx.message.author
@@ -64,16 +64,14 @@ class Queue(commands.Cog):
         if len(q) < 1:
             q.append(s)
             logging.info('{0} add {1}'.format(ctx.guild, s))
-            prevMessages[k] = await ctx.send(
-                s.mention + ' is now in the ' + name)
+            await ctx.send(s.mention + ' is now in the ' + name)
         else:
-            prevMessages[k] = await ctx.send(
-                q[0].mention + ' is already in the ' + name)
+            await ctx.send(q[0].mention + ' is already in the ' + name)
 
     @commands.command()
     async def done(self, ctx: Context, arg):
         """
-        Removes people from the kitchen queue
+        Removes people from the kitchen(k) or bathroom(b) queue
         """
         k = ctx.guild.name + ctx.channel.name
         s = ctx.message.author
@@ -85,11 +83,11 @@ class Queue(commands.Cog):
             q = getBathroomQueue(ctx.guild)
             name = "bathroom"
         else:
-            raise Exception("Incorrect parameters")
+            Exception("Incorrect parameters")
 
         if s in q:
             q.remove(s)
             logging.info('{0} remove {1}'.format(ctx.guild, s))
-            prevMessages[k] = await ctx.send(s.mention + ' is no longer in the ' + name)
+            await ctx.send(s.mention + ' is no longer in the ' + name)
         else:
-            prevMessages[k] = await ctx.send(s.mention + ' is not in the ' + name)
+            await ctx.send(s.mention + ' is not in the ' + name)
