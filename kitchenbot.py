@@ -78,7 +78,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.errors.CommandNotFound):
         pass
     else:
-        await ctx.send('Something went wrong, please contact an Admin.')
+        await ctx.send('Something went wrong, probably using the wrong parameters')
         logging.error(error)
 
 
