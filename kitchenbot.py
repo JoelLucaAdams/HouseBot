@@ -78,6 +78,7 @@ async def on_message(message):
             await ctx.send(message.author.mention + ' it is still morning!')
         else:
             await ctx.send(message.author.mention + ' it is not morning anymore!')
+    await bot.process_commands(message)
 
 
 @bot.event
