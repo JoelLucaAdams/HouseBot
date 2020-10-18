@@ -26,7 +26,7 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 helpCommand = DefaultHelpCommand()
 
 bot = commands.Bot(
-    command_prefix=["?kitchen ", "?k "],
+    command_prefix="!",
     help_command=helpCommand
 )
 
@@ -36,7 +36,7 @@ bot.add_cog(generalCog)
 helpCommand.cog = generalCog
 
 # load other cogs
-bot.load_extension("cogs.kitchenBot")
+bot.load_extension("cogs.queue")
 
 
 @bot.event

@@ -12,7 +12,7 @@ def setup(bot):
     """
     Setup the cogs in this extension
     """
-    bot.add_cog(General(bot))
+    bot.add_cog(Kitchen(bot))
 
 
 def getQueue(serverName: str):
@@ -26,7 +26,7 @@ def getQueue(serverName: str):
         return queues.get(serverName)
 
 
-class General(commands.Cog):
+class Kitchen(commands.Cog):
     """
     Commands for kitchen
     """
