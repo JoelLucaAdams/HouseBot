@@ -59,18 +59,15 @@ async def activity_loop():
     while not bot.is_closed():
         if i > 1:
             i = 0
-
         status = ['the kitchen', 'the bathroom']
-
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=status[i]))
-        i += 1
-
         await asyncio.sleep(4)
+        i += 1
 
 
 @bot.event
 async def on_message(message):
-    if message.author.id == 347351276855623680 and message.content.__contains__("mornin"):
+    if message.author.id == 347351276855623680 and message.content.lower().__contains__("morn"):
         now = datetime.now()
         midday = now.replace(hour=12, minute=0, second=0, microsecond=0)
         ctx = await bot.get_context(message)
