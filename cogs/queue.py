@@ -1,5 +1,6 @@
 from discord.ext import commands
 from discord.ext.commands import Context
+from datetime import datetime
 
 import logging
 
@@ -49,7 +50,6 @@ class Queue(commands.Cog):
         """
         Adds the person to the kitchen(k) or bathroom(b) queue
         """
-        k = ctx.guild.name + ctx.channel.name
         s = ctx.message.author
 
         if arg == "k":
@@ -73,7 +73,6 @@ class Queue(commands.Cog):
         """
         Removes people from the kitchen(k) or bathroom(b) queue
         """
-        k = ctx.guild.name + ctx.channel.name
         s = ctx.message.author
 
         if arg == "k":
@@ -83,7 +82,7 @@ class Queue(commands.Cog):
             q = getBathroomQueue(ctx.guild)
             name = "bathroom"
         else:
-            Exception("Incorrect parameters")
+            raise Exception("Incorrect parameters")
 
         if s in q:
             q.remove(s)
@@ -91,3 +90,15 @@ class Queue(commands.Cog):
             await ctx.send(s.mention + ' is no longer in the ' + name)
         else:
             await ctx.send(s.mention + ' is not in the ' + name)
+
+    @commands.command()
+    async def morning(self, ctx: Context):
+        s = ctx.message.author
+
+        now = datetime.now()
+        midday = now.replace(hour=12, minute=0, second=0, microsecond=0)
+
+        if now < midday:
+            await ctx.send(s.mention + ' it is still morning!')
+        else:
+            await ctx.send(s.mention + ' it is not morning anymore!')
