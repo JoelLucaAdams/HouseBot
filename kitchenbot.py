@@ -7,6 +7,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import DefaultHelpCommand
 from dotenv import load_dotenv
+from datetime import datetime
 
 # logs data to the discord.log file, if this file doesn't exist at runtime it is created automatically
 from cogs.utilities import Utilities
@@ -65,6 +66,19 @@ async def activity_loop():
         i += 1
 
         await asyncio.sleep(4)
+
+
+@bot.event
+async def on_message(message):
+    if message.author.id == 347351276855623680 and message.content.__contains__("mornin"):
+        now = datetime.now()
+        midday = now.replace(hour=12, minute=0, second=0, microsecond=0)
+        ctx = await bot.get_context(message)
+        if now < midday:
+            await ctx.send(message.author.mention + ' it is still morning!')
+        else:
+            await ctx.send(message.author.mention + ' it is not morning anymore!')
+
 
 @bot.event
 async def on_command_error(ctx, error):
