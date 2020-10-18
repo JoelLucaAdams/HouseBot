@@ -78,7 +78,7 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.errors.CommandNotFound):
         pass
     else:
-        await ctx.send('Something went wrong, probably using the wrong parameters')
+        await ctx.send('You are missing a required argument.')
         logging.error(error)
 
 
