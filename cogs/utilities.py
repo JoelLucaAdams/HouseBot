@@ -25,7 +25,7 @@ class Utilities(commands.Cog):
         Print a link to the source code
         """
         await ctx.send(content='Created by `Joel Adams`\n'
-                               'https://github.com/JoelLucaAdams/kitchenBot')
+                               'https://github.com/JoelLucaAdams/houseBot')
 
     @commands.command()
     async def feedback(self, ctx: Context):
@@ -33,4 +33,4 @@ class Utilities(commands.Cog):
         Report feedback or issues with the bot
         """
         await ctx.send('If the bot is broken or you have any feedback you\'d like to submit please create a issue on '
-                       'GitHub: https://github.com/JoelLucaAdams/kitchenBot')
+                       'GitHub: https://github.com/JoelLucaAdams/houseBot')
