@@ -1,6 +1,5 @@
 from discord.ext import commands
 from discord.ext.commands import Context
-from datetime import datetime
 
 import logging
 
@@ -90,15 +89,3 @@ class Queue(commands.Cog):
             await ctx.send(s.mention + ' is no longer in the ' + name)
         else:
             await ctx.send(s.mention + ' is not in the ' + name)
-
-    @commands.command()
-    async def morning(self, ctx: Context):
-        s = ctx.message.author
-
-        now = datetime.now()
-        midday = now.replace(hour=12, minute=0, second=0, microsecond=0)
-
-        if now < midday:
-            await ctx.send(s.mention + ' it is still morning!')
-        else:
-            await ctx.send(s.mention + ' it is not morning anymore!')
