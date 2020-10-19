@@ -14,26 +14,22 @@ def setup(bot):
     bot.add_cog(Queue(bot))
 
 
-def getKitchenQueue(serverName: str):
+def getQueue(serverName: str, queueType: str):
     """
-    Get the kitchen queue for the server
+    Gets the queue type and returns a queue
     """
-    if serverName in kitchenQueue.keys():
-        return kitchenQueue.get(serverName)
+    if queueType is "k":
+        queue = kitchenQueue
+    elif queueType is "b":
+        queue = bathroomQueue
     else:
-        kitchenQueue[serverName] = []
-        return kitchenQueue.get(serverName)
+        raise Exception("Incorrect parameters")
 
-
-def getBathroomQueue(serverName: str):
-    """
-    Get the bathroom queue for the server
-    """
-    if serverName in bathroomQueue.keys():
-        return bathroomQueue.get(serverName)
+    if serverName in queue.keys():
+        return queue.get(serverName)
     else:
-        bathroomQueue[serverName] = []
-        return bathroomQueue.get(serverName)
+        queue[serverName] = []
+        return queue.get(serverName)
 
 
 class Queue(commands.Cog):
@@ -51,11 +47,10 @@ class Queue(commands.Cog):
         """
         s = ctx.message.author
 
-        if arg == "k":
-            q = getKitchenQueue(ctx.guild)
+        q = getQueue(ctx.guild, arg)
+        if arg is "k":
             name = "kitchen"
-        elif arg == "b":
-            q = getBathroomQueue(ctx.guild)
+        elif arg is "b":
             name = "bathroom"
         else:
             raise Exception("Incorrect parameters")
@@ -74,11 +69,10 @@ class Queue(commands.Cog):
         """
         s = ctx.message.author
 
-        if arg == "k":
-            q = getKitchenQueue(ctx.guild)
+        q = getQueue(ctx.guild, arg)
+        if arg is "k":
             name = "kitchen"
-        elif arg == "b":
-            q = getBathroomQueue(ctx.guild)
+        elif arg is "b":
             name = "bathroom"
         else:
             raise Exception("Incorrect parameters")
@@ -89,3 +83,21 @@ class Queue(commands.Cog):
             await ctx.send(s.mention + ' is no longer in the ' + name)
         else:
             await ctx.send(s.mention + ' is not in the ' + name)
+
+    @commands.command()
+    async def resetQueue(self, ctx: Context, arg):
+        """
+        resets queues using: (a)-all, (k)-kitchen, (b)-bathroom
+        """
+        if arg is 'a':
+            getQueue(ctx.guild, 'k').clear()
+            getQueue(ctx.guild, 'b').clear()
+            await ctx.send('cleared bathroom and kitchen queues')
+        elif arg is 'k':
+            getQueue(ctx.guild, 'k').clear()
+            await ctx.send('cleared kitchen queue')
+        elif arg is 'b':
+            getQueue(ctx.guild, 'b').clear()
+            await ctx.send('cleared bathroom queue')
+        else:
+            raise Exception("Incorrect parameters")
