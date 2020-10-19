@@ -13,11 +13,10 @@ class Utilities(commands.Cog):
         """
         import time
         start_time = time.time()
-        message = await ctx.send('pong. `DWSP latency: ' + str(round(ctx.bot.latency * 1000)) + 'ms`')
+        message = await ctx.send('pong. `DWSPz latency: ' + str(round(ctx.bot.latency * 1000)) + 'ms`')
         end_time = time.time()
-        await message.edit(content='pong. `DWSP latency: ' + str(round(ctx.bot.latency * 1000)) + 'ms` '
-                                                                                                  '`Response time: ' + str(
-            round(end_time - start_time, 3)) + 'ms`')
+        await message.edit(content='pong. `DWSP latency: ' + str(round(ctx.bot.latency * 1000)) + 'ms` ' +
+                                   '`Response time: ' + str(round(end_time - start_time, 3)) + 'ms`')
 
     @commands.command()
     async def source(self, ctx: Context):
